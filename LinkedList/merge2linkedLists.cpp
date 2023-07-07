@@ -29,44 +29,37 @@ Node<int>* sortTwoLists(Node<int>* first, Node<int>* second)
     if(first==NULL&&second==NULL)
         return NULL;
     if(first==NULL&&second!=NULL)
-        return first;
-    if(second==NULL&& first!=NULL)
         return second;
+    if(second==NULL&& first!=NULL)
+        return first;
     Node<int>* temp;
     Node<int>*first_node;
     if(first->data<second->data)
     {
             first_node=first;
+            first=first->next;
     }
 else{
             first_node=second;
+            second=second->next;
     }
+    temp=first_node;
     while(first!=NULL&& second!=NULL)
     {
         if(first->data<second->data)
         {
-            temp=first;
+            temp->next=first;
             first=first->next;
-            temp=first;
         }
         else{
-            temp=second;
+            temp->next=second;
             second=second->next;
-            cout<<"hi"<<temp->data<<endl;
         }
         temp=temp->next;
     }
-    while(second!=NULL)
-    {
-        temp=second;
-        second=second->next; 
-        temp=temp->next;
-    }
-    while(first!=NULL)
-    {
-        temp=first;
-        first=first->next; 
-        temp=temp->next;
-    }    
+    if(second!=NULL)
+    temp->next=second;
+    if(first!=NULL)
+    temp->next=first;
     return first_node;
 }
